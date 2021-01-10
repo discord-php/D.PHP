@@ -1,0 +1,23 @@
+{
+    "name": "discord-php/d.php",
+    "description": "DiscordPHP test bot",
+    "type": "project",
+    "require": {
+        "team-reflex/discord-php": "dev-develop",
+        "vlucas/phpdotenv": "^5.2",
+        "davidcole1340/reactsh": "dev-master",
+        "phpdocumentor/reflection": "^4.0"
+    },
+    "license": "AGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "David Cole",
+            "email": "david.cole1340@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "DPHP\\": "src/"
+        }
+    }
+}
