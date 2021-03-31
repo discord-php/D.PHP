@@ -1,5 +1,7 @@
 <?php
 
+ini_set('memory_limit', '-1');
+
 /*
  * This file is a part of the D.PHP project.
  *
@@ -38,6 +40,7 @@ $discord = new Discord([
     'loop' => $loop,
     'logger' => $logger,
     'httpLogger' => $logger,
+    'loadAllMembers' => true,
 ]);
 
 $shell = new Shell($loop);
