@@ -14,6 +14,7 @@ ini_set('memory_limit', '-1');
 use Discord\Discord;
 use Discord\Parts\Channel\Message;
 use Discord\Parts\Embed\Embed;
+use Discord\WebSockets\Intents;
 use Dotenv\Dotenv;
 use DPHP\Commands\Reflect;
 use DPHP\Commands\Stats;
@@ -39,8 +40,8 @@ $discord = new Discord([
     'token' => $_ENV['TOKEN'],
     'loop' => $loop,
     'logger' => $logger,
-    'httpLogger' => $logger,
     'loadAllMembers' => true,
+    'intents' => Intents::getDefaultIntents() | Intents::GUILD_MEMBERS | Intents::GUILD_PRESENCES,
 ]);
 
 $shell = new Shell($loop);
