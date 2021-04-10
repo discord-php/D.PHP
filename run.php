@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is a part of the D.PHP project.
+ *
+ * Copyright (c) 2020-present David Cole <david.cole1340@gmail.com>
+ *
+ * This source file is subject to the GNU Affero General Public License v3.0 or later
+ * that is bundled with this source code in the LICENSE.md file.
+ */
+
 ini_set('memory_limit', '-1');
 
 /*
@@ -16,6 +25,7 @@ use Discord\Parts\Channel\Message;
 use Discord\Parts\Embed\Embed;
 use Discord\WebSockets\Intents;
 use Dotenv\Dotenv;
+use DPHP\Commands\Events;
 use DPHP\Commands\Reflect;
 use DPHP\Commands\Stats;
 use Monolog\Handler\StreamHandler;
@@ -71,12 +81,13 @@ function generateHelpCommand(Discord $discord, array $commands): Embed
     return $embed;
 }
 
-$discord->on('ready', function (Discord $discord) use ($shell) {
-    $commands = [
-        'reflect' => new Reflect($discord),
-        'info' => new Stats($discord),
-    ];
+$commands = [
+    'reflect' => new Reflect($discord),
+    'info' => new Stats($discord),
+    'events' => new Events($discord),
+];
  
+$discord->on('ready', function (Discord $discord) use ($commands, $shell) {
     $discord->on('message', function (Message $message, Discord $discord) use ($commands) {
         // check if message starts with mention
         if (strpos($message->content, '<@'.$discord->id.'>') === 0 || strpos($message->content, '<@!'.$discord->id.'>') === 0) {
