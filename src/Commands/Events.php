@@ -43,9 +43,16 @@ class Events extends Command
                 ->setDescription('This contains a list of the amount of events we have seen, sorted by event.');
 
         $total = 0;
+        $count = 0;
         foreach ($this->events as $event => $count) {
+            // Limit events to 24
+            if ($count >= 24) {
+                break;
+            }
+
             $embed->addFieldValues("`{$event}`", $count);
             $total += $count;
+            $count++;
         }
 
         $embed->addFieldValues('Total Events', $total);
