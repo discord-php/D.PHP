@@ -35,7 +35,7 @@ class Stats extends Command
     {
         $this->startTime = $this->lastReconnect = Carbon::now();
 
-        $this->discord->on('reconnect', function () {
+        $this->discord->on('reconnected', function () {
             $this->lastReconnect = Carbon::now();
         });
     }
