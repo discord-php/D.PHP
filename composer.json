@@ -3,10 +3,11 @@
     "description": "DiscordPHP test bot",
     "type": "project",
     "require": {
-        "team-reflex/discord-php": "dev-master",
+        "team-reflex/discord-php": "dev-cacheInterface",
         "vlucas/phpdotenv": "^5.2",
         "davidcole1340/reactsh": "dev-master",
-        "phpdocumentor/reflection": "^4.0"
+        "phpdocumentor/reflection": "^4.0",
+        "wyrihaximus/react-cache-redis": "^4.2"
     },
     "license": "AGPL-3.0-or-later",
     "authors": [
