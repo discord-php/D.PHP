@@ -20,6 +20,7 @@ ini_set('memory_limit', '-1');
  * that is bundled with this source code in the LICENSE.md file.
  */
 
+use Clue\React\Redis\Factory as RedisFactory;
 use Discord\Discord;
 use Discord\Parts\Channel\Message;
 use Discord\Parts\Embed\Embed;
@@ -33,6 +34,7 @@ use Monolog\Logger;
 use React\EventLoop\Factory;
 use React\Sh\Shell;
 use React\Sh\StdioHandler;
+use WyriHaximus\React\Cache\Redis;
 
 include __DIR__.'/vendor/autoload.php';
 
@@ -46,12 +48,16 @@ $logger = new Logger('D.PHP');
 
 $loop = Factory::create();
 
+$redis = (new RedisFactory($loop))->createLazyClient('localhost:6379');
+$cache = new Redis($redis, 'dphp:cache:');
+
 $discord = new Discord([
     'token' => $_ENV['TOKEN'],
     'loop' => $loop,
     'logger' => $logger,
     'loadAllMembers' => true,
     'intents' => Intents::getDefaultIntents() | Intents::GUILD_MEMBERS | Intents::GUILD_PRESENCES,
+    'cacheInterface' => $cache,
 ]);
 
 $shell = new Shell($loop);
