@@ -3,7 +3,7 @@
     "description": "DiscordPHP test bot",
     "type": "project",
     "require": {
-        "team-reflex/discord-php": "dev-cacheInterface",
+        "team-reflex/discord-php": "dev-master",
         "vlucas/phpdotenv": "^5.2",
         "davidcole1340/reactsh": "dev-master",
         "phpdocumentor/reflection": "^4.0",
