@@ -49,7 +49,7 @@ $logger = new Logger('D.PHP');
 $loop = Factory::create();
 
 $redis = (new RedisFactory($loop))->createLazyClient('localhost:6379');
-$cache = new Redis($redis, 'dphp:cache:');
+$cache = new Redis($redis, 'dphp:');
 
 $discord = new Discord([
     'token' => $_ENV['TOKEN'],
@@ -58,6 +58,7 @@ $discord = new Discord([
     'loadAllMembers' => true,
     'intents' => Intents::getDefaultIntents() | Intents::GUILD_MEMBERS | Intents::GUILD_PRESENCES,
     'cacheInterface' => $cache,
+    'cacheSweep' => true,
 ]);
 
 $shell = new Shell($loop);
