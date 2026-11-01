@@ -1,0 +1,9 @@
+{
+  "repository": "https://github.com/discord-php/DiscordPHP",
+  "revision": "16eccf53b6ebe833e444f48590d63ff461651136",
+  "ref": "master",
+  "dphpRepository": "https://github.com/discord-php/D.PHP",
+  "dphpRevision": "7d5efc9e8d661f2aaedb899116ff48a94001a965",
+  "reference": "https://discord-php.github.io/DiscordPHP/",
+  "note": "master is informational; revision is authoritative. Refresh explicitly and review the generated diff."
+}

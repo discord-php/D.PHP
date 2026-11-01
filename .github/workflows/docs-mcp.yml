@@ -1,0 +1,60 @@
+name: Documentation MCP
+
+on:
+  pull_request:
+    paths:
+      - 'workers/docs-mcp/**'
+      - '.github/workflows/docs-mcp.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-contracts:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['8.1', '8.5']
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: workers/docs-mcp/package-lock.json
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '${{ matrix.php }}'
+          coverage: none
+          tools: composer:v2
+      - name: Read pinned source revision
+        id: source
+        working-directory: workers/docs-mcp
+        run: node -e 'const lock=require("./source-lock.json"); if(!/^[a-f0-9]{40}$/.test(lock.revision)) process.exit(1); console.log("revision="+lock.revision)' >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@v4
+        with:
+          repository: discord-php/DiscordPHP
+          ref: '${{ steps.source.outputs.revision }}'
+          path: .source-discordphp
+          persist-credentials: false
+      - name: Install isolated generator dependencies
+        working-directory: workers/docs-mcp/tools
+        run: composer install --no-plugins --no-scripts --no-interaction --prefer-dist
+      - name: Install locked Worker dependencies
+        working-directory: workers/docs-mcp
+        run: npm ci --ignore-scripts --no-fund --no-audit
+      - name: Reproduce pinned public index
+        working-directory: workers/docs-mcp
+        run: node scripts/generate-index.mjs ../../.source-discordphp --check
+      - name: Protocol, bounds and generator contracts
+        working-directory: workers/docs-mcp
+        run: npm test
+      - name: Validate local Worker bundle
+        working-directory: workers/docs-mcp
+        run: npm run build
+      - name: Smoke-test bundle in local workerd
+        working-directory: workers/docs-mcp
+        run: npm run smoke:local
