@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dphp-docs-mcp",
+  "main": "src/worker.mjs",
+  "minify": true,
+  "compatibility_date": "2026-10-07",
+  "workers_dev": true,
+  "preview_urls": false,
+  "send_metrics": false,
+  "observability": { "enabled": false }
+}

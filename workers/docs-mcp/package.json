@@ -1,0 +1,23 @@
+{
+  "name": "dphp-docs-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "check:index": "node scripts/check-index.mjs",
+    "build": "node scripts/build.mjs",
+    "smoke:local": "node scripts/smoke-local.mjs",
+    "profile:local": "node scripts/profile-local.mjs",
+    "dev": "wrangler dev --local",
+    "deploy": "wrangler deploy"
+  },
+  "engines": { "node": ">=22" },
+  "dependencies": {
+    "@modelcontextprotocol/core": "2.4.0",
+    "@modelcontextprotocol/server": "2.4.0",
+    "agents": "0.32.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": { "wrangler": "4.145.0", "ws": "8.21.0" }
+}

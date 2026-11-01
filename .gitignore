@@ -5,3 +5,9 @@ test.php
 composer.lock
 .php_cs.cache
 discord.log
+/.source-discordphp/
+/workers/docs-mcp/node_modules/
+/workers/docs-mcp/.wrangler/
+/workers/docs-mcp/dist/
+/workers/docs-mcp/tools/vendor/
+!/workers/docs-mcp/tools/composer.lock

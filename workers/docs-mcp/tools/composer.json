@@ -1,0 +1,8 @@
+{
+  "name": "discord-php/dphp-docs-index-builder",
+  "description": "Offline static documentation index generator; never loads the Discord client",
+  "type": "project",
+  "license": "AGPL-3.0-or-later",
+  "require": { "php": "^8.1.2", "phpdocumentor/reflection": "^4.0" },
+  "config": { "platform": { "php": "8.1.2" }, "allow-plugins": false, "sort-packages": true }
+}
